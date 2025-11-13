@@ -43,12 +43,12 @@ app.post('/api/order', async (req, res) => {
   const { name, phone, delivery, address, cart } = req.body;
   const order = { name, phone, delivery, address, cart };
 
-  const transporter = nodemailer.createTransport({
+/*  const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
-    }
+    }*/
   });
 
   const mailOptions = {
@@ -70,7 +70,7 @@ transporter.verify((error, success) => {
 
 
   try {
-   await transporter.sendMail(mailOptions);
+  // await transporter.sendMail(mailOptions);
     /*await twilioClient.messages.create({
       body: smsBody,
       from: process.env.TWILIO_PHONE,
@@ -285,6 +285,7 @@ app.get('/', (req, res) => {
 // 🚀 Запуск сервера
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Сервер працює на порту ${PORT}`));
+
 
 
 
