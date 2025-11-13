@@ -1,0 +1,352 @@
+
+  <!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>e-zakaz — Швидка їжа онлайн</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="nav.css">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+
+  <header>
+    <h1><span class="burger" onclick="toggleSpin(this)">🍔</span> e-zakaz</h1>
+    <nav class="main-nav">
+  <a href="#">Головна</a>
+  <a href="javascript:void(0)" onclick="openMenuModal()">Меню</a>
+  <a href="javascript:void(0)" onclick="openReviewsModal()">Відгуки</a>
+  <a href="javascript:void(0)" onclick="openContactsModal()">Контакти</a>
+</nav>
+    <div class="header-buttons">
+  <button onclick="toggleTheme()">Темна тема</button>
+  <button onclick="openCart()">Кошик</button>
+</div>
+
+<div class="working-status">
+  <span id="open-indicator">Зараз відкрито</span>
+  <div class="schedule-dropdown">
+    <button id="toggle-schedule">📅 Графік</button>
+    <ul id="schedule-list" class="hidden">
+      <li>Пн–Пт: 9:00–22:00</li>
+      <li>Сб–Нд: вихідний</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Кнопка вызова -->
+<button id="messengerBtn">📲 Зв’язатися з нами</button>
+
+<!-- Модальное окно -->
+<div id="messengerModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeMessenger()">&times;</span>
+    <h3 id="modalTitle">Оберіть месенджер</h3>
+
+    <textarea id="userMessage" rows="3" placeholder="Ваше повідомлення..." style="width: 100%; margin-top: 10px;"></textarea>
+
+    <select id="messengerSelect" style="width: 100%; margin-top: 10px;">
+      <option value="viber">Viber</option>
+      <option value="telegram">Telegram</option>
+      <option value="whatsapp">WhatsApp</option>
+    </select>
+
+    <button id="sendMessageBtn" style="margin-top: 10px;">📨 Надіслати</button>
+    <p id="sendStatus" style="font-size: 14px; color: green; display: none;">✅ Повідомлення надіслано!</p>
+
+    <div style="margin-top: 15px;">
+      <select id="languageSelect">
+        <option value="ua">Українська</option>
+        <option value="en">English</option>
+        <option value="pl">Polski</option>
+        <option value="de">Deutsch</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+
+
+  </header>
+
+  <section class="hero">
+    <h2>Швидко. Смачно. Зручно.</h2>
+  </section>
+
+ <div id="menuModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeMenuModal()">&times;</span>
+    <h2>🍽️ Меню</h2>
+    <select id="filter" onchange="filterMenu()">
+      <option value="all">Усе</option>
+      <option value="food">Їжа</option>
+      <option value="drinks">Напої</option>
+      <option value="dessert">Десерти</option>
+      <option value="special">Спеціальні</option>
+    </select>
+    <div id="menuItems">
+      <div class="item" data-type="food">
+        <img src="images/Пицца Пепперони.png" alt="Піца">
+        <div class="info">
+          <h3>🍕 Піца</h3>
+          <p>Соковита піца з сиром і томатами</p>
+          <span class="price">150₴</span>
+          <button onclick="addToCart(this)">Додати до кошика</button>
+        </div>
+      </div>
+      <!-- Їжа -->
+<div class="item" data-type="food">
+  <img src="images/Perfect Pizza Dough .png" alt="Борщ">
+  <div class="info">
+    <h3>🍕 Піца</h3>
+<p>Традиційна італійська піца з томатами та сиром</p>
+    <span class="price">120₴</span>
+   <button onclick="addToCart(this)">Додати до кошика</button>
+  </div>
+</div>
+
+<!-- Напої -->
+<div class="item" data-type="drinks">
+  <img src="images/Армуду-стакан _Gaze_.png" alt="Компот">
+  <div class="info">
+    <h3>🍵 Чай</h3>
+<p>Домашній чай з ягід</p>
+    <span class="price">40₴</span>
+   <button onclick="addToCart(this)">Додати до кошика</button>
+  </div>
+</div>
+
+<!-- Десерти -->
+<div class="item" data-type="dessert">
+  <img src="images/Чизкейк Нью-Йорк пош.png" alt="Чізкейк">
+  <div class="info">
+    <h3>🍰 Чізкейк</h3>
+    <p>Ніжний чізкейк з полуничним соусом</p>
+    <span class="price">85₴</span>
+   <button onclick="addToCart(this)">Додати до кошика</button>
+  </div>
+</div>
+
+<!-- Спеціальні -->
+<div class="item" data-type="special">
+  <img src="images/Veggie Quinoa Bowl w.png" alt="Веган боул">
+  <div class="info">
+    <h3>🥗 Веган боул</h3>
+    <p>Збалансована страва з кіноа, нутом та овочами</p>
+    <span class="price">135₴</span>
+    <button onclick="addToCart(this)">Додати до кошика</button>
+  </div>
+</div>
+      <!-- Додай інші пункти аналогічно -->
+    </div>
+  </div>
+</div>
+
+ 
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCart()">&times;</span>
+      <h2>Ваш кошик</h2>
+      <ul id="cartItems"></ul>
+      <p><strong>Сума:</strong> ₴<span id="cartTotal">0</span></p>
+      <form id="orderForm">
+        <input type="text" id="name" placeholder="Ваше ім’я" required />
+        <input type="tel" id="phone" placeholder="Телефон" required />
+        <div id="phoneError" style="color: red; display: none;">❗ Введіть повний номер телефону</div>
+        <select id="delivery">
+
+          <option value="courier">Кур’єр</option>
+          <option value="pickup">Самовивіз</option>
+          
+        </select>
+        <input type="text" id="address" placeholder="Адреса доставки" />
+        <button type="submit">✅ Підтвердити замовлення</button>
+
+        <div id="liqpayContainer" style="display: none; margin-top: 1rem;">
+         <button type="button" onclick="initiateLiqPay()">💳 Оплатити онлайн</button>
+       </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="menu-section">
+    <h2>Популярні страви</h2>
+    <div class="menu-grid">
+      <div class="dish promo-dish" id="promo1" data-id="promo1">
+  <img src="images/Classic Cheese Burge.png" alt="Бургер">
+  <h3>Бургер Класик</h3>
+  <p class="old-price">₴150</p>
+  <p class="discount-price">₴120</p>
+  <p class="promo-label">🔥 Акція до кінця дня!</p>
+  <div class="countdown" id="promo1-timer"></div>
+  <button onclick="addToCart(this)">Додати до кошика</button>
+</div>
+
+ <div class="dish promo-dish" id="promo2" data-id="promo2">
+  <img src="images/Pizza - Wikipedia.png" alt="Піца">
+  <h3>Піца Маргарита</h3>
+  <p class="old-price">₴150</p>
+  <p class="discount-price">₴110</p>
+  <p class="promo-label">🔥 Акція до кінця дня!</p>
+  <div class="countdown" id="promo2-timer"></div>
+  <button onclick="addToCart(this)">Додати до кошика</button>
+</div>
+
+<div class="dish promo-dish" id="promo3" data-id="promo3">
+  <img src="images/Салат греческий с ку.png" alt="Салат">
+  <h3>Салат Цезар</h3>
+  <p class="old-price">₴95</p>
+  <p class="discount-price">₴50</p>
+  <p class="promo-label">🔥 Акція до кінця дня!</p>
+  <div class="countdown" id="promo3-timer"></div>
+  <button onclick="addToCart(this)">Додати до кошика</button>
+</div>
+    </div>
+  
+  </section>
+
+  <section class="menu-gallery">
+  <h2>📸 Атмосфера нашого закладу</h2>
+  <div class="gallery-grid">
+    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="Кухня" onclick="openImageModal(this.src)">
+    <img src="https://images.unsplash.com/photo-1543353071-873f17a7a088" alt="Бар" onclick="openImageModal(this.src)">
+    <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" alt="Кухня" onclick="openImageModal(this.src)">
+  </div>
+</section>
+
+
+<section class="user-reviews">
+  <h2>💬 Відгуки наших клієнтів</h2>
+  <div class="review-card">
+    <img src="images/Безалкогольные напит.png" alt="Олександр">
+    <div class="review-text">
+      <p><strong>Владимир</strong> — ⭐⭐⭐⭐⭐</p>
+      <p>Замовляв піцу — дуже смачна, швидка доставка. Рекомендую!</p>
+    </div>
+  </div>
+  <div class="review-card">
+    <img src="images/Безалкогольные напит.png" alt="Марія">
+    <div class="review-text">
+      <p><strong>Ірина</strong> — ⭐⭐⭐⭐</p>
+      <p>Борщ як у бабусі! Трохи довго чекала, але смак компенсує.</p>
+    </div>
+  </div>
+  <div class="review-card">
+    <img src="images/Безалкогольные напит.png" alt="Ігор">
+    <div class="review-text">
+      <p><strong>Алексей</strong> — ⭐⭐⭐⭐⭐</p>
+      <p>Чізкейк просто топ! Замовлятиму ще.</p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<section class="promo-section">
+  <div class="promo-content">
+    <div class="video-wrapper">
+      <video controls>
+        <source src="videos/promo.mp4" type="video/mp4">
+        Ваш браузер не підтримує відео.
+      </video>
+    </div>
+    <div class="about-us">
+      <h2>Про нас</h2>
+      <ul>
+  <li>🍔 Швидка та смачна їжа без очікування</li>
+  <li>⚡️ Обслуговування за лічені хвилини</li>
+  <li>🪑 Зручні місця для перекусу на ходу</li>
+  <li>📱 Онлайн-замовлення та самовивіз</li>
+</ul>
+    </div>
+  </div>
+</section>
+
+
+
+
+  <!-- Модалка контактів -->
+<div id="contactsModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeContactsModal()">&times;</span>
+    <h2>Контакти</h2>
+    <p>📞 Телефон: +380-XX-XXX-XXXX</p>
+    <p>📧 Email: example@email.com</p>
+     <p>👩 Ім’я продавця: Олена</p>
+    <p>📱 Viber: +380-XX-XXX-XXXX</p>
+    <p>📍 Місто: Миколаїв, Україна</p>
+  </div>
+</div>
+
+<!-- Модалка відгуків -->
+<div id="reviewsModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeReviewsModal()">&times;</span>
+    <h2>Залишити відгук</h2>
+    <form id="reviewForm">
+      <input type="text" name="website" style="display:none">
+      <label for="email">Email:</label>
+      <input type="email" name="email" placeholder="Ваш Email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+<textarea name="comment" placeholder="Коментар" required minlength="10" maxlength="500"></textarea>
+<select name="rating">
+        <option value="5">⭐⭐⭐⭐⭐</option>
+        <option value="4">⭐⭐⭐⭐</option>
+        <option value="3">⭐⭐⭐</option>
+        <option value="2">⭐⭐</option>
+        <option value="1">⭐</option>
+      </select>
+      <button type="submit">Надіслати</button>
+    </form>
+  </div>
+</div>
+
+  <footer>
+    <div class="social-links">
+  <a href="https://www.instagram.com/yourhotel" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.facebook.com/yourhotel" target="_blank"><i class="fab fa-facebook"></i></a>
+  <a href="https://www.youtube.com/yourhotel" target="_blank"><i class="fab fa-youtube"></i></a>
+</div>
+
+
+<section class="ad-slider">
+  <h2>🍽️ Рекомендуємо — на правах реклами</h2>
+  <div class="slider-container">
+    <a id="adLink" href="images/cozy Ukrainian food .png" target="_blank">
+      <img id="adSlide" src="images/Classic Cheese Burge.png" alt="Реклама" />
+    </a>
+    <p id="adCaption">Соковитий бургер зі знижкою</p>
+    <div class="slider-buttons">
+      <button onclick="stopAdSlider()">⏸️ Зупинити</button>
+      <button onclick="startAdSlider()">▶️ Відновити</button>
+    </div>
+  </div>
+</section>
+
+
+
+    <p>© 2025 e-zakaz. Усі права захищено.</p>
+  </footer>
+
+  <div id="imageModal" class="modal" onclick="closeImageModal()">
+  <span class="close" onclick="closeImageModal()">&times;</span>
+  <img id="modalImage" class="modal-img" src="" alt="Фото">
+</div>
+<div id="cartNotification" class="notification">Товар додано до кошика 🛒</div>
+
+
+
+<script src="js/inputmask.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="script.js"></script>
+  <script src="nav.js"></script>
+</body>
+</html>
