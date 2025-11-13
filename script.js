@@ -141,7 +141,7 @@ async function initiateLiqPay() {
   const total = cart.reduce((sum, item) => sum + item.price, 0);
   const description = `Оплата замовлення: ${cart.map(c => c.name).join(', ')}`;
 
-  const res = await fetch('http://localhost:3000/api/pay', {
+  const res = await fetch('https://e-zakaz.onrender.com/api/pay', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ amount: total, description })
@@ -462,4 +462,5 @@ function setupScheduleToggle() {
 document.addEventListener('DOMContentLoaded', () => {
   updateWorkingStatus();
   setupScheduleToggle();
+
 });
