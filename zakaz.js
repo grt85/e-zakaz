@@ -275,7 +275,7 @@ app.post('/submit-review', reviewLimiter, (req, res) => {
 
 
 
- перед запуском сервера
+
 app.get('/', (req, res) => {
   res.send('Сервер працює! Вітаємо 👋');
 });
@@ -283,6 +283,7 @@ app.get('/', (req, res) => {
 // 🚀 Запуск сервера
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Сервер працює на порту ${PORT}`));
+
 
 
 
