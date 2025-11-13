@@ -12,6 +12,8 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(__dirname));
+
 
 //const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 
@@ -277,12 +279,13 @@ app.post('/submit-review', reviewLimiter, (req, res) => {
 
 
 app.get('/', (req, res) => {
-  res.send('Сервер працює! Вітаємо 👋');
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // 🚀 Запуск сервера
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Сервер працює на порту ${PORT}`));
+
 
 
 
