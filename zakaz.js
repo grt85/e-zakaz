@@ -271,8 +271,7 @@ app.post('/submit-review', reviewLimiter, (req, res) => {
   });
 });
 
-const express = require('express');
-const app = express();
+
 
 
 
@@ -285,8 +284,7 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Сервер працює на порту ${PORT}`));
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Сервер працює на порту ${PORT}`));
+
 
 
 
