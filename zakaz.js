@@ -60,13 +60,13 @@ app.post('/api/order', async (req, res) => {
 
   const smsBody = `Замовлення від ${name}: ${cart.map(c => c.name).join(', ')}. Сума: ₴${cart.reduce((t, c) => t + c.price, 0)}`;
 
-transporter.verify((error, success) => {
+/*transporter.verify((error, success) => {
   if (error) {
     console.error('❌ Помилка підключення до пошти:', error);
   } else {
     console.log('✅ Пошта готова до надсилання');
   }
-});
+});*/
 
 
   try {
@@ -285,6 +285,7 @@ app.get('/', (req, res) => {
 // 🚀 Запуск сервера
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Сервер працює на порту ${PORT}`));
+
 
 
 
