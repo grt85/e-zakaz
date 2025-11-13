@@ -161,7 +161,7 @@ async function initiateLiqPay() {
 }
 
 async function checkPaymentStatus(orderId) {
-  const res = await fetch('http://localhost:3000/api/pay/status', {
+ const res = await fetch('https://e-zakaz.onrender.com/api/pay/status', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ order_id: orderId })
@@ -464,4 +464,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setupScheduleToggle();
 
 });
+
 
