@@ -48,8 +48,8 @@ app.post('/api/order', async (req, res) => {
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
-    }*/
-  });
+    }
+  });*/
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -285,6 +285,7 @@ app.get('/', (req, res) => {
 // 🚀 Запуск сервера
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Сервер працює на порту ${PORT}`));
+
 
 
 
